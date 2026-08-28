@@ -145,3 +145,23 @@
   font-size: 20rpx;
   letter-spacing: 2rpx;
 }
+
+/* 任务 / 复盘 备注小字 */
+.notes {
+  margin-top: 12rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.note-text,
+.review-note {
+  font-size: 22rpx;          /* 小字 */
+  color: var(--text-3);      /* 浅灰，弱于标题 */
+  line-height: 1.5;
+  word-break: break-all;     /* 长备注自动换行，不撑破卡片 */
+}
+
+.review-note {
+  color: var(--text-2);      /* 复盘备注稍微深一点，便于区分 */
+}

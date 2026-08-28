@@ -74,8 +74,10 @@
   margin-top: 20rpx;
   background: var(--card-2);
   border-radius: 20rpx;
-  padding: 16rpx 24rpx;
-  font-size: 32rpx;
+  padding: 18rpx 24rpx;
+  font-size: 30rpx;
+  line-height: 1.4;    
+  height: 72rpx;     
   color: var(--text);
   width: 100%;
   box-sizing: border-box;
@@ -83,9 +85,11 @@
 
 /* 标题输入 */
 .title-input {
-  font-size: 34rpx;
+  font-size: 32rpx;
   color: var(--text);
-  padding: 8rpx 0;
+  padding: 14rpx 0;     
+  line-height: 1.5;    
+  height: 76rpx;     
   width: 100%;
 }
 

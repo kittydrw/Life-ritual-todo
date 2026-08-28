@@ -1,5 +1,5 @@
 <view wx:if="{{visible}}" class="r-overlay" bindtap="onSkip">
-  <view class="r-card">
+  <view class="r-card" catchtap="noop">
     <view class="r-title">复盘这一刻</view>
     <view class="r-task">{{task.title}}</view>
 

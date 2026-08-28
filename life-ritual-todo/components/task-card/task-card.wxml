@@ -29,9 +29,14 @@
         <category-tag wx:if="{{task.category}}" name="{{task.category}}" color="{{task.categoryColor}}"></category-tag>
         <text wx:if="{{overdue}}" class="overdue-badge">已逾期</text>
         <view wx:if="{{task.isCompleted}}" class="complete-info">
-          <text class="mood">{{task.mood || '😊'}}</text>
+          <text wx:if="{{task.mood}}" class="mood">{{task.mood}}</text>
           <text class="stars">{{starsText}}</text>
         </view>
+      </view>
+      <!-- ↓ 新增：任务备注 + 复盘备注（有才显示） -->
+      <view class="notes">
+        <text wx:if="{{task.note}}" class="note-text">📝备注 {{task.note}}</text>
+        <text wx:if="{{task.reviewNote}}" class="review-note">💭复盘 {{task.reviewNote}}</text>
       </view>
     </view>
   </view>
