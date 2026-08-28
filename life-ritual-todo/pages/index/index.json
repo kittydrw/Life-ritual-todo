@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "progress-ring": "/components/progress-ring/progress-ring",
+    "task-card": "/components/task-card/task-card",
+    "quote-modal": "/components/quote-modal/quote-modal",
+    "review-modal": "/components/review-modal/review-modal",
+    "calendar-picker": "/components/calendar-picker/calendar-picker"
+  }
+}

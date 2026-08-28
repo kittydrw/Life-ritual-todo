@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "category-tag": "/components/category-tag/category-tag"
+  }
+}

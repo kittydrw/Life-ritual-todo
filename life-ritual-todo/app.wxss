@@ -1,0 +1,43 @@
+/**app.wxss 全局样式**/
+
+page {
+  /* 浅色模式默认值，主题切换时由页面内联覆盖 */
+  --primary: #6BCB77;
+  --primary-deep: #4CAF62;
+  --primary-soft: rgba(107, 203, 119, 0.12);
+  --bg: #F7F9F2;
+  --card: #FFFFFF;
+  --card-2: #FBFDF8;
+  --text: #2D3436;
+  --text-2: #636E72;
+  --text-3: #A8B0AE;
+  --border: #F0F0F0;
+  --overdue: #FF4757;
+  --shadow: rgba(43, 91, 56, 0.06);
+  --fab-text: #FFFFFF;
+  /* 全局字体固定为圆润柔和风格，全站统一，不可切换 */
+  --font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-family);
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+view, text, scroll-view, input, textarea, button, picker, canvas {
+  box-sizing: border-box;
+}
+
+/* 通用按压反馈 */
+.press-scale {
+  transition: transform 0.12s ease;
+}
+.press-scale:active {
+  transform: scale(0.96);
+}
+
+/* 底部安全区 */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}

@@ -1,0 +1,147 @@
+.task-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 160rpx;
+  background: var(--overdue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24rpx;
+}
+
+.delete-text {
+  color: #ffffff;
+  font-size: 26rpx;
+}
+
+.task-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  background: var(--card);
+  border-radius: 24rpx;
+  padding: 26rpx 24rpx;
+  box-shadow: 0 6rpx 20rpx var(--shadow);
+}
+
+.task-card.dragging {
+  transition: none;
+}
+
+.task-card.slide {
+  transition: transform 0.22s ease;
+}
+
+.checkbox-wrap {
+  margin-right: 20rpx;
+  padding-top: 4rpx;
+  flex-shrink: 0;
+}
+
+.checkbox {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  border: 3rpx solid var(--text-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.checkbox.checked {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.checkbox.overdue-box {
+  border-color: var(--overdue);
+}
+
+.check-mark {
+  color: #ffffff;
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.row-top {
+  display: flex;
+  align-items: center;
+}
+
+.emoji {
+  font-size: 34rpx;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 30rpx;
+  color: var(--text);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.title.done-title {
+  text-decoration: line-through;
+  color: var(--text-3);
+  opacity: 0.55;
+}
+
+.title.overdue-title {
+  color: var(--overdue);
+}
+
+.row-bottom {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 14rpx;
+  gap: 12rpx;
+}
+
+.time-text {
+  font-size: 22rpx;
+  color: var(--text-2);
+  font-family: var(--font-family);
+}
+
+.overdue-badge {
+  font-size: 20rpx;
+  color: var(--overdue);
+  border: 1rpx solid var(--overdue);
+  border-radius: 20rpx;
+  padding: 2rpx 12rpx;
+}
+
+.complete-info {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.mood {
+  font-size: 26rpx;
+  margin-right: 8rpx;
+}
+
+.stars {
+  font-size: 20rpx;
+  letter-spacing: 2rpx;
+}

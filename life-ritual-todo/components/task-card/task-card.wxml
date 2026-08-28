@@ -1,0 +1,38 @@
+<view class="task-wrap">
+  <view class="delete-btn" catchtap="onDeleteTap">
+    <text class="delete-text">删除</text>
+  </view>
+  <view
+    class="task-card {{dragging ? 'dragging' : 'slide'}} {{offsetX < 0 ? 'open' : ''}}"
+    style="transform: translateX({{offsetX}}px);"
+    bindtouchstart="onTouchStart"
+    bindtouchmove="onTouchMove"
+    bindtouchend="onTouchEnd"
+    bindtap="onCardTap"
+  >
+    <view class="checkbox-wrap">
+      <view
+        class="checkbox {{task.isCompleted ? 'checked' : ''}} {{overdue ? 'overdue-box' : ''}}"
+        catchtap="onToggleDone"
+        catchtouchmove="noop"
+      >
+        <text wx:if="{{task.isCompleted}}" class="check-mark">✓</text>
+      </view>
+    </view>
+    <view class="content">
+      <view class="row-top">
+        <text class="emoji">{{task.emoji}}</text>
+        <text class="title {{task.isCompleted ? 'done-title' : ''}} {{overdue ? 'overdue-title' : ''}}">{{task.title}}</text>
+      </view>
+      <view class="row-bottom">
+        <text wx:if="{{timeText}}" class="time-text {{overdue ? 'overdue-title' : ''}}">{{timeText}}</text>
+        <category-tag wx:if="{{task.category}}" name="{{task.category}}" color="{{task.categoryColor}}"></category-tag>
+        <text wx:if="{{overdue}}" class="overdue-badge">已逾期</text>
+        <view wx:if="{{task.isCompleted}}" class="complete-info">
+          <text class="mood">{{task.mood || '😊'}}</text>
+          <text class="stars">{{starsText}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

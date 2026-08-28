@@ -1,0 +1,8 @@
+<view wx:if="{{visible}}" class="q-overlay" bindtap="onClose">
+  <view class="q-card" catchtap="noop">
+    <view class="q-deco">🕯️</view>
+    <view class="q-title">仪式感时刻</view>
+    <view class="q-quote">“{{quote}}”</view>
+    <view class="q-btn" hover-class="q-btn-hover" bindtap="onStart">开始今日仪式</view>
+  </view>
+</view>

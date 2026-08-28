@@ -1,0 +1,228 @@
+/* components/calendar-picker/calendar-picker.wxss */
+
+.calendar-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  align-items: flex-end;
+  animation: maskFadeIn 0.28s ease;
+}
+
+.calendar-mask.closing {
+  animation: maskFadeOut 0.24s ease forwards;
+}
+
+.calendar-container {
+  width: 100%;
+  background: var(--card);
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 36rpx 32rpx calc(40rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  animation: slideUp 0.28s cubic-bezier(0.22, 0.8, 0.36, 1);
+}
+
+.calendar-container.closing {
+  animation: slideDown 0.24s ease forwards;
+}
+
+/* 头部 */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8rpx;
+}
+
+.calendar-title {
+  font-size: 38rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.calendar-close {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background: var(--card-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-hover {
+  transform: scale(0.9);
+}
+
+.close-icon {
+  font-size: 28rpx;
+  color: var(--text-2);
+}
+
+/* 月份切换 */
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32rpx;
+  margin-top: 24rpx;
+}
+
+.nav-arrow {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: var(--card-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-arrow-icon {
+  font-size: 40rpx;
+  color: var(--text-2);
+  line-height: 1;
+}
+
+.nav-today {
+  font-size: 26rpx;
+  color: var(--primary);
+  background: var(--primary-soft);
+  padding: 14rpx 40rpx;
+  border-radius: 40rpx;
+}
+
+.nav-hover {
+  transform: scale(0.92);
+}
+
+/* 星期行 */
+.week-row {
+  display: flex;
+  margin-top: 28rpx;
+}
+
+.week-item {
+  flex: 1;
+  text-align: center;
+  font-size: 24rpx;
+  color: var(--text-3);
+  padding-bottom: 12rpx;
+}
+
+/* 日期网格 */
+.date-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.date-item {
+  width: 14.2857%;
+  height: 88rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.date-num {
+  width: 68rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 30rpx;
+  color: var(--text);
+}
+
+.date-item.today .date-num {
+  border: 2rpx solid var(--primary);
+  color: var(--primary);
+}
+
+.date-item.selected .date-num {
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+}
+
+.date-item.other-month .date-num {
+  color: var(--text-3);
+  opacity: 0.55;
+}
+
+.date-item .dot {
+  position: absolute;
+  bottom: 8rpx;
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.date-item.selected .dot {
+  background: #ffffff;
+}
+
+/* 底部按钮 */
+.calendar-footer {
+  margin-top: 28rpx;
+}
+
+.btn-confirm {
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 500;
+  color: var(--fab-text);
+  background: var(--primary);
+  border-radius: 48rpx;
+  padding: 22rpx 0;
+  box-shadow: 0 8rpx 24rpx var(--primary-soft);
+}
+
+.confirm-hover {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* 动画 */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes maskFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes maskFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

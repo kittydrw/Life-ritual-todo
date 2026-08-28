@@ -1,0 +1,11 @@
+<scroll-view class="emoji-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+  <view class="emoji-list">
+    <view
+      wx:for="{{emojis}}"
+      wx:key="*this"
+      class="emoji-item {{item === value ? 'active' : ''}}"
+      data-emoji="{{item}}"
+      bindtap="onPick"
+    >{{item}}</view>
+  </view>
+</scroll-view>

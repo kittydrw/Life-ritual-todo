@@ -1,0 +1,4 @@
+<view class="tag">
+  <view class="dot" style="background:{{color}};"></view>
+  <text class="name">{{name}}</text>
+</view>

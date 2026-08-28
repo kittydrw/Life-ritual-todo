@@ -1,0 +1,42 @@
+<view wx:if="{{visible}}" class="r-overlay" bindtap="onSkip">
+  <view class="r-card">
+    <view class="r-title">复盘这一刻</view>
+    <view class="r-task">{{task.title}}</view>
+
+    <view class="r-label">此刻的心情</view>
+    <view class="r-moods">
+      <view
+        wx:for="{{moods}}"
+        wx:key="*this"
+        class="r-mood {{item === mood ? 'active' : ''}}"
+        data-mood="{{item}}"
+        bindtap="onPickMood"
+      >{{item}}</view>
+    </view>
+
+    <view class="r-label">打个分吧</view>
+    <view class="r-stars">
+      <text
+        wx:for="{{[1,2,3,4,5]}}"
+        wx:key="*this"
+        class="r-star"
+        data-star="{{item}}"
+        bindtap="onPickStar"
+      >{{item <= rating ? '⭐' : '☆'}}</text>
+    </view>
+
+    <textarea
+      class="r-note"
+      placeholder="写一句复盘备注（可选）"
+      placeholder-class="r-note-ph"
+      value="{{note}}"
+      bindinput="onNoteInput"
+      maxlength="100"
+    ></textarea>
+
+    <view class="r-btns">
+      <view class="r-skip" hover-class="r-hover" bindtap="onSkip">跳过</view>
+      <view class="r-submit" hover-class="r-hover" bindtap="onSubmit">完成复盘</view>
+    </view>
+  </view>
+</view>

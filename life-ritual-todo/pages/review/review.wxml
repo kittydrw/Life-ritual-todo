@@ -1,0 +1,94 @@
+<view class="page-root" style="{{themeStyle}}">
+
+  <!-- 顶部导航 -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;">
+    <view class="nav-back press-scale" bindtap="goBack">
+      <text class="nav-back-icon">←</text>
+    </view>
+    <view class="nav-title">每周回顾</view>
+    <view class="nav-spacer"></view>
+  </view>
+
+  <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="inner">
+
+      <!-- 周选择器 -->
+      <view class="week-bar">
+        <view class="week-btn press-scale" data-dir="-1" bindtap="shiftWeek">
+          <text class="week-arrow">‹</text>
+        </view>
+        <view class="week-info">
+          <text class="week-label">{{weekLabel}}</text>
+          <text class="week-range">{{weekStart}} ~ {{weekEnd}}</text>
+        </view>
+        <view class="week-btn press-scale" data-dir="1" bindtap="shiftWeek">
+          <text class="week-arrow">›</text>
+        </view>
+      </view>
+
+      <view wx:if="{{!isCurrentWeek}}" class="back-today press-scale" bindtap="backToThisWeek">回到本周</view>
+
+      <!-- 统计卡片 -->
+      <view class="stats-card">
+        <view class="stat-item">
+          <text class="stat-num">{{stats.done}}</text>
+          <text class="stat-label">完成总数</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item">
+          <text class="stat-num">{{stats.rate}}%</text>
+          <text class="stat-label">完成率</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item">
+          <text class="stat-num">{{stats.streak}}</text>
+          <text class="stat-label">连续打卡(天)</text>
+        </view>
+      </view>
+
+      <!-- 显示切换 -->
+      <view class="mode-bar">
+        <view class="mode-tab {{mode === 'completed' ? 'active' : ''}}" data-mode="completed" bindtap="onModeChange">显示已完成</view>
+        <view class="mode-tab {{mode === 'all' ? 'active' : ''}}" data-mode="all" bindtap="onModeChange">显示全部</view>
+      </view>
+
+      <!-- 每日任务列表 -->
+      <view class="empty" wx:if="{{!hasAny}}">
+        <text class="empty-emoji">🍃</text>
+        <text class="empty-text">这一周还没有任务记录</text>
+      </view>
+
+      <block wx:for="{{days}}" wx:key="date">
+        <view class="day-group" wx:if="{{item.tasks.length > 0}}">
+          <view class="day-header">
+            <text class="day-label">{{item.label}}</text>
+            <text class="day-num">{{item.dayNum}}</text>
+          </view>
+          <view class="day-list">
+            <view wx:for="{{item.tasks}}" wx:key="id" class="row {{item.isCompleted ? 'done' : ''}}">
+              <view class="row-check {{item.isCompleted ? 'checked' : ''}}">
+                <text wx:if="{{item.isCompleted}}" class="row-check-mark">✓</text>
+              </view>
+              <text class="row-emoji">{{item.emoji}}</text>
+              <text class="row-title {{item.isCompleted ? 'done-title' : ''}}">{{item.title}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <view class="inner-bottom"></view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部分享按钮 -->
+  <view class="footer safe-bottom">
+    <view class="share-btn press-scale {{saving ? 'disabled' : ''}}" hover-class="share-hover" bindtap="onShare">
+      <text class="share-icon">🖼️</text>
+      <text class="share-text">{{saving ? '生成中…' : '保存本周卡片'}}</text>
+    </view>
+  </view>
+
+  <!-- 隐藏的分享画布 -->
+  <canvas type="2d" id="shareCanvas" class="share-canvas"></canvas>
+
+</view>

@@ -1,0 +1,131 @@
+<view class="page-root" style="{{themeStyle}}">
+
+  <!-- 顶部导航 -->
+  <view class="nav" style="padding-top:{{statusBarHeight}}px;">
+    <view class="nav-back press-scale" bindtap="goBack">
+      <text class="nav-back-icon">←</text>
+    </view>
+    <view class="nav-title">{{mode === 'edit' ? '编辑任务' : '添加任务'}}</view>
+    <view class="nav-spacer"></view>
+  </view>
+
+  <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="form">
+
+      <!-- Emoji 图标 -->
+      <view class="field">
+        <view class="field-label">选择图标</view>
+        <emoji-picker value="{{emoji}}" bind:change="onEmojiChange"></emoji-picker>
+        <input
+          class="emoji-custom"
+          placeholder="或手动输入 Emoji"
+          placeholder-class="ph"
+          value="{{customEmoji}}"
+          bindinput="onCustomEmojiInput"
+          maxlength="8"
+          confirm-type="done"
+        />
+      </view>
+
+      <!-- 任务标题 -->
+      <view class="field">
+        <view class="field-label">任务标题</view>
+        <input
+          class="title-input"
+          placeholder="要完成什么？"
+          placeholder-class="ph"
+          value="{{title}}"
+          bindinput="onTitleInput"
+          maxlength="40"
+          confirm-type="done"
+        />
+      </view>
+
+      <!-- 时间设置 -->
+      <view class="field">
+        <view class="field-label">时间设置</view>
+        <view class="type-tabs">
+          <view class="type-tab {{dateType === 'none' ? 'active' : ''}}" data-type="none" bindtap="onDateTypeChange">无时间</view>
+          <view class="type-tab {{dateType === 'range' ? 'active' : ''}}" data-type="range" bindtap="onDateTypeChange">开始-结束</view>
+          <view class="type-tab {{dateType === 'deadline' ? 'active' : ''}}" data-type="deadline" bindtap="onDateTypeChange">截止时间</view>
+        </view>
+
+        <view class="picker-row">
+          <picker mode="date" value="{{targetDate}}" bindchange="onDateChange">
+            <view class="picker-item press-scale">
+              <text class="picker-icon">📅</text>
+              <text class="picker-text">{{targetDate}}</text>
+            </view>
+          </picker>
+
+          <block wx:if="{{dateType === 'range'}}">
+            <picker mode="time" value="{{startTime}}" bindchange="onStartTimeChange">
+              <view class="picker-item press-scale">
+                <text class="picker-icon">🕐</text>
+                <text class="picker-text">{{startTime}}</text>
+              </view>
+            </picker>
+            <text class="picker-sep">—</text>
+            <picker mode="time" value="{{endTime}}" bindchange="onEndTimeChange">
+              <view class="picker-item press-scale">
+                <text class="picker-icon">🕑</text>
+                <text class="picker-text">{{endTime}}</text>
+              </view>
+            </picker>
+          </block>
+
+          <picker wx:if="{{dateType === 'deadline'}}" mode="time" value="{{deadline}}" bindchange="onDeadlineChange">
+            <view class="picker-item press-scale">
+              <text class="picker-icon">⏰</text>
+              <text class="picker-text">{{deadline}}</text>
+            </view>
+          </picker>
+        </view>
+      </view>
+
+      <!-- 分区选择 -->
+      <view class="field">
+        <view class="field-label">分区</view>
+        <view class="cats">
+          <view
+            wx:for="{{categories}}"
+            wx:key="name"
+            class="cat-item {{category === item.name ? 'active' : ''}}"
+            data-index="{{index}}"
+            bindtap="onCategoryPick"
+          >
+            <view class="cat-dot" style="background:{{item.color}};"></view>
+            <text class="cat-name">{{item.name}}</text>
+          </view>
+          <view class="cat-item add-cat" bindtap="onAddCategory">
+            <text class="cat-add">＋</text>
+            <text class="cat-name">新分区</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 备注 -->
+      <view class="field">
+        <view class="field-label">备注（可选）</view>
+        <textarea
+          class="note-input"
+          placeholder="写下一些提醒或想法…"
+          placeholder-class="ph"
+          value="{{note}}"
+          bindinput="onNoteInput"
+          maxlength="200"
+        ></textarea>
+      </view>
+
+      <view class="form-bottom"></view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作按钮 -->
+  <view class="footer safe-bottom">
+    <view wx:if="{{mode === 'edit'}}" class="footer-btn del-btn" hover-class="footer-hover" bindtap="onDelete">删除</view>
+    <view wx:else class="footer-btn cancel-btn" hover-class="footer-hover" bindtap="onCancel">取消</view>
+    <view class="footer-btn save-btn" hover-class="footer-hover" bindtap="onSave">{{mode === 'edit' ? '保存修改' : '创建'}}</view>
+  </view>
+
+</view>

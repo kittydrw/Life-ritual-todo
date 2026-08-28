@@ -1,0 +1,146 @@
+<view class="page-root" style="{{themeStyle}}">
+
+  <!-- 顶部导航 -->
+  <view class="nav" style="padding-top:{{statusBarHeight + 14}}px;">
+    <view class="nav-left">
+      <text class="nav-date">{{dateText}}</text>
+      <text class="nav-greet">{{greeting}}</text>
+    </view>
+    <view class="nav-right">
+      <view class="nav-icon press-scale" hover-class="nav-icon-hover" bindtap="goReview">
+        <text>📊</text>
+      </view>
+      <view class="nav-icon press-scale" hover-class="nav-icon-hover" bindtap="onToggleTheme">
+        <text>{{theme === 'light' ? '🌙' : '☀️'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 日期切换栏 -->
+  <view class="date-bar">
+    <view class="date-arrow press-scale" hover-class="date-arrow-hover" bindtap="onPrevDay">
+      <text class="date-arrow-icon">‹</text>
+    </view>
+    <view class="date-center">
+      <view class="date-text-wrap press-scale" hover-class="date-tap-hover" bindtap="showCalendar">
+        <text class="date-text">{{selectedDateText}}</text>
+        <text class="date-calendar-icon">📅</text>
+      </view>
+      <view wx:if="{{!isToday}}" class="date-today-btn press-scale" hover-class="date-arrow-hover" bindtap="onBackToday">回到今天</view>
+    </view>
+    <view class="date-arrow press-scale" hover-class="date-arrow-hover" bindtap="onNextDay">
+      <text class="date-arrow-icon">›</text>
+    </view>
+  </view>
+
+  <scroll-view class="scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="scroll-inner">
+
+      <!-- 今日进度卡片 -->
+      <view class="progress-card">
+        <view class="progress-text">
+          <text class="progress-title">{{progressTitle}}</text>
+          <text class="progress-sub">{{doneToday}}/{{totalToday}}</text>
+          <text class="progress-hint" wx:if="{{totalToday > 0 && doneToday < totalToday}}">还差 {{totalToday - doneToday}} 件小事</text>
+          <text class="progress-hint" wx:if="{{totalToday > 0 && doneToday === totalToday}}">全部完成，太棒了 🎉</text>
+          <text class="progress-hint" wx:if="{{totalToday === 0}}">{{isToday ? '今天还没有安排' : '这一天还没有安排'}}</text>
+        </view>
+        <progress-ring percent="{{percent}}" size="200" color="{{theme === 'light' ? '#6BCB77' : '#5DBE6A'}}">
+          <text class="ring-percent">{{percent}}%</text>
+          <text class="ring-label">完成率</text>
+        </progress-ring>
+      </view>
+
+      <!-- 空状态 -->
+      <view class="empty" wx:if="{{!hasAny}}">
+        <text class="empty-emoji">🌱</text>
+        <text class="empty-text">{{isToday ? '今天还没有仪式感，添加一件小事吧' : '这一天还没有安排，去看看别的日子吧'}}</text>
+      </view>
+
+      <!-- 分组任务列表 -->
+      <block wx:for="{{groups}}" wx:key="key">
+        <view class="group" wx:if="{{item.count > 0}}">
+          <view class="group-header" hover-class="group-header-hover" bindtap="toggleGroup" data-key="{{item.key}}">
+            <text class="group-label">{{item.label}}</text>
+            <text class="group-count">{{item.count}}</text>
+            <text class="group-arrow {{collapsed[item.key] ? 'collapsed' : ''}}">▾</text>
+          </view>
+          <view class="group-body" wx:if="{{!collapsed[item.key]}}">
+            <task-card
+              wx:for="{{item.tasks}}"
+              wx:key="id"
+              task="{{item}}"
+              today="{{today}}"
+              bind:toggle="onToggleTask"
+              bind:edit="onEditTask"
+              bind:delete="onDeleteTask"
+            ></task-card>
+          </view>
+        </view>
+      </block>
+
+      <view class="scroll-bottom"></view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部添加按钮 -->
+  <view class="fab-wrap safe-bottom">
+    <view class="fab press-scale" hover-class="fab-hover" bindtap="goAdd">
+      <text class="fab-plus">＋</text>
+    </view>
+  </view>
+
+  <!-- 语录弹窗 -->
+  <quote-modal visible="{{quoteVisible}}" bind:close="onQuoteClose" bind:start="onQuoteStart"></quote-modal>
+
+  <!-- 复盘弹窗 -->
+  <review-modal visible="{{reviewVisible}}" task="{{reviewTask}}" bind:submit="onReviewSubmit" bind:skip="onReviewSkip"></review-modal>
+
+  <!-- 完成仪式动画 -->
+  <view wx:if="{{showAnimation && animation}}" class="anim-layer" aria-hidden="true">
+    <block wx:if="{{animation.type === 'confetti'}}">
+      <view
+        wx:for="{{animation.particles}}"
+        wx:key="index"
+        class="confetti"
+        style="left:{{item.left}}%;background:{{item.color}};width:{{item.size}}rpx;height:{{item.size}}rpx;animation-delay:{{item.delay}}s;animation-duration:{{item.duration}}s;--drift:{{item.drift}}px;--rotate:{{item.rotate}}deg;"
+      ></view>
+    </block>
+    <block wx:if="{{animation.type === 'petals'}}">
+      <view
+        wx:for="{{animation.particles}}"
+        wx:key="index"
+        class="petal"
+        style="left:{{item.left}}%;background:{{item.color}};width:{{item.size}}rpx;height:{{item.size}}rpx;animation-delay:{{item.delay}}s;animation-duration:{{item.duration}}s;--drift:{{item.drift}}px;"
+      ></view>
+    </block>
+    <block wx:if="{{animation.type === 'stars'}}">
+      <text
+        wx:for="{{animation.particles}}"
+        wx:key="index"
+        class="star"
+        style="left:{{item.left}}%;top:{{item.top}}%;font-size:{{item.size}}rpx;animation-delay:{{item.delay}}s;animation-duration:{{item.duration}}s;"
+      >{{item.char}}</text>
+    </block>
+    <block wx:if="{{animation.type === 'coffee'}}">
+      <view class="coffee-cup">
+        <text class="coffee-emoji">☕</text>
+      </view>
+      <view
+        wx:for="{{animation.particles}}"
+        wx:key="index"
+        class="steam"
+        style="left:{{item.left}}%;width:{{item.size}}rpx;height:{{item.size}}rpx;animation-delay:{{item.delay}}s;animation-duration:{{item.duration}}s;--drift:{{item.drift}}px;"
+      ></view>
+    </block>
+  </view>
+
+  <!-- 日历选择 -->
+  <calendar-picker
+    visible="{{calendarVisible}}"
+    selectedDate="{{selectedDate}}"
+    bind:select="onDateSelected"
+    bind:close="onCalendarClose"
+  ></calendar-picker>
+
+</view>

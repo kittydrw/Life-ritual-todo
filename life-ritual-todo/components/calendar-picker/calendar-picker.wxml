@@ -1,0 +1,49 @@
+<!-- components/calendar-picker/calendar-picker.wxml -->
+<view wx:if="{{visible}}" class="calendar-mask {{closing ? 'closing' : ''}}" bindtap="onMaskTap">
+  <view class="calendar-container {{closing ? 'closing' : ''}}" catchtap="noop">
+
+    <!-- 头部：年/月标题 + 关闭 -->
+    <view class="calendar-header">
+      <text class="calendar-title">{{year}}年{{month}}月</text>
+      <view class="calendar-close" hover-class="close-hover" bindtap="onCloseTap">
+        <text class="close-icon">✕</text>
+      </view>
+    </view>
+
+    <!-- 月份切换 -->
+    <view class="calendar-nav">
+      <view class="nav-arrow" hover-class="nav-hover" bindtap="prevMonth">
+        <text class="nav-arrow-icon">‹</text>
+      </view>
+      <view class="nav-today" hover-class="nav-hover" bindtap="goToday">今天</view>
+      <view class="nav-arrow" hover-class="nav-hover" bindtap="nextMonth">
+        <text class="nav-arrow-icon">›</text>
+      </view>
+    </view>
+
+    <!-- 星期行 -->
+    <view class="week-row">
+      <text class="week-item" wx:for="{{weekDays}}" wx:key="*this">{{item}}</text>
+    </view>
+
+    <!-- 日期网格 -->
+    <view class="date-grid">
+      <view
+        class="date-item {{item.isToday ? 'today' : ''}} {{item.isSelected ? 'selected' : ''}} {{!item.isCurrentMonth ? 'other-month' : ''}}"
+        wx:for="{{dates}}"
+        wx:key="date"
+        data-date="{{item.date}}"
+        bindtap="selectDate"
+      >
+        <text class="date-num">{{item.day}}</text>
+        <view class="dot" wx:if="{{item.hasTask}}"></view>
+      </view>
+    </view>
+
+    <!-- 底部确认按钮 -->
+    <view class="calendar-footer">
+      <view class="btn-confirm" hover-class="confirm-hover" bindtap="onConfirm">确定</view>
+    </view>
+
+  </view>
+</view>

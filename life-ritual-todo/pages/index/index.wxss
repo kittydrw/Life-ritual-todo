@@ -1,0 +1,401 @@
+/* pages/index/index.wxss */
+.page-root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* 顶部导航 */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 88rpx;
+  box-sizing: border-box;
+  padding-left: 40rpx;
+  padding-right: 24rpx;
+  padding-bottom: 20rpx;
+}
+
+.nav-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-date {
+  font-size: 40rpx;
+  font-weight: 600;
+  font-family: var(--font-family);
+  color: var(--text);
+}
+
+.nav-greet {
+  font-size: 24rpx;
+  color: var(--text-2);
+  margin-top: 4rpx;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+
+.nav-icon {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 24rpx;
+  background: var(--card);
+  box-shadow: 0 4rpx 16rpx var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+}
+
+.nav-icon-hover {
+  transform: scale(0.92);
+}
+
+/* 日期切换栏 */
+.date-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40rpx 24rpx;
+}
+
+.date-arrow {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: 0 4rpx 16rpx var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.date-arrow-hover {
+  transform: scale(0.9);
+}
+
+.date-arrow-icon {
+  font-size: 40rpx;
+  color: var(--text);
+  line-height: 1;
+}
+
+.date-center {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  min-width: 0;
+}
+
+.date-text-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 16rpx;
+  border-radius: 16rpx;
+}
+
+.date-tap-hover {
+  background: var(--primary-soft);
+  transform: scale(0.96);
+}
+
+.date-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text);
+  font-family: var(--font-family);
+  white-space: nowrap;
+}
+
+.date-calendar-icon {
+  font-size: 28rpx;
+  line-height: 1;
+}
+
+.date-today-btn {
+  font-size: 22rpx;
+  color: var(--primary);
+  background: var(--primary-soft);
+  padding: 8rpx 22rpx;
+  border-radius: 26rpx;
+  flex-shrink: 0;
+}
+
+/* 滚动区 */
+.scroll {
+  flex: 1;
+  min-height: 0;
+}
+
+.scroll-inner {
+  padding: 8rpx 40rpx 0;
+}
+
+.scroll-bottom {
+  height: 200rpx;
+}
+
+/* 今日进度卡片 */
+.progress-card {
+  background: var(--card);
+  border-radius: 32rpx;
+  padding: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8rpx 24rpx var(--shadow);
+  margin-bottom: 36rpx;
+}
+
+.progress-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  font-family: var(--font-family);
+}
+
+.progress-sub {
+  font-size: 72rpx;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 8rpx 0;
+}
+
+.progress-hint {
+  font-size: 24rpx;
+  color: var(--text-2);
+}
+
+.ring-percent {
+  font-size: 52rpx;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ring-label {
+  font-size: 20rpx;
+  color: var(--text-3);
+  margin-top: 4rpx;
+}
+
+/* 空状态 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 40rpx;
+}
+
+.empty-emoji {
+  font-size: 100rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-2);
+  text-align: center;
+}
+
+/* 分组 */
+.group {
+  margin-bottom: 20rpx;
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 8rpx;
+}
+
+.group-header-hover {
+  opacity: 0.7;
+}
+
+.group-label {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text);
+  font-family: var(--font-family);
+}
+
+.group-count {
+  font-size: 22rpx;
+  color: var(--text-3);
+  background: var(--card-2);
+  border-radius: 20rpx;
+  padding: 2rpx 16rpx;
+  margin-left: 14rpx;
+}
+
+.group-arrow {
+  margin-left: auto;
+  font-size: 26rpx;
+  color: var(--text-3);
+  transition: transform 0.2s ease;
+}
+
+.group-arrow.collapsed {
+  transform: rotate(-90deg);
+}
+
+.group-body {
+  padding-top: 4rpx;
+}
+
+/* 底部添加按钮 */
+.fab-wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 40rpx;
+  pointer-events: none;
+}
+
+.fab {
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12rpx 30rpx var(--primary-soft), 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  pointer-events: auto;
+}
+
+.fab-plus {
+  color: var(--fab-text);
+  font-size: 56rpx;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.fab-hover {
+  transform: scale(0.9);
+}
+
+/* 完成仪式动画层 */
+.anim-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 998;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  top: -40rpx;
+  border-radius: 4rpx;
+  animation: confettiFall 1.2s ease-in forwards;
+}
+
+.petal {
+  position: absolute;
+  top: -60rpx;
+  border-radius: 50% 0 50% 50%;
+  animation: petalFall 1.3s ease-in forwards;
+}
+
+.star {
+  position: absolute;
+  animation: starRise 1.1s ease-out forwards;
+}
+
+.coffee-cup {
+  position: absolute;
+  left: 50%;
+  top: 62%;
+  transform: translateX(-50%);
+  font-size: 120rpx;
+  animation: cupFade 1.5s ease forwards;
+}
+
+.steam {
+  position: absolute;
+  top: 48%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.75);
+  animation: steamRise 1.3s ease-out forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(var(--rotate)) translateX(var(--drift));
+    opacity: 0.2;
+  }
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(50vh) translateX(calc(var(--drift) * 0.6)) rotate(120deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--drift)) rotate(260deg);
+    opacity: 0;
+  }
+}
+
+@keyframes starRise {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-30rpx) scale(1.15);
+  }
+  100% {
+    transform: translateY(-420rpx) scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes steamRise {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-420rpx) translateX(var(--drift)) scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes cupFade {
+  0% { opacity: 0; transform: translateX(-50%) scale(0.7); }
+  20% { opacity: 1; transform: translateX(-50%) scale(1); }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}

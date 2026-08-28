@@ -1,0 +1,21 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  background: var(--primary-soft);
+  border-radius: 20rpx;
+  padding: 4rpx 14rpx;
+}
+
+.dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  margin-right: 8rpx;
+}
+
+.name {
+  font-size: 20rpx;
+  color: var(--text-2);
+  line-height: 1.4;
+}

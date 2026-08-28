@@ -1,0 +1,5 @@
+<view class="ring" style="width:{{size}}rpx;height:{{size}}rpx;background:conic-gradient({{color}} {{clamped}}%, var(--border) 0);">
+  <view class="ring-inner" style="width:{{innerSize}}rpx;height:{{innerSize}}rpx;">
+    <slot></slot>
+  </view>
+</view>
