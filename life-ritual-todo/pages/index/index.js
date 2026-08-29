@@ -14,6 +14,19 @@ function pad(n) {
 function fmtDate(d) {
   return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
 }
+// 取出任务的"排序时间点"，用于待办列表按截止/结束时间从早到晚排
+function sortTimeOf(task) {
+  // 截止任务：日期 + 当天截止时间，拼成 'YYYY-MM-DD HH:MM'
+  if (task.dateType === 'deadline' && task.targetDate && task.deadline) {
+    return task.targetDate + ' ' + task.deadline;
+  }
+  // 区间任务：用"结束时间"（startTime 不管，只看结束）
+  if (task.dateType === 'range' && task.targetDate && task.endTime) {
+    return task.targetDate + ' ' + task.endTime;
+  }
+  // 无时间（none 类型）：返回一个超大值，永远排到最后
+  return '9999-12-31 23:59';
+}
 
 Page({
   data: {
@@ -154,12 +167,14 @@ Page({
     const activeTasks = dayTasks
       .filter((t) => !t.isCompleted)
       .sort((a, b) => {
-        const ao = a.targetDate < today ? 0 : 1;
-        const bo = b.targetDate < today ? 0 : 1;
-        if (ao !== bo) return ao - bo;
+        const ta = sortTimeOf(a);
+        const tb = sortTimeOf(b);
+        // 'YYYY-MM-DD HH:MM' 格式一致时，字符串字典序 = 时间先后序，早的在前
+        if (ta !== tb) return ta < tb ? -1 : 1;
+        // 时间完全相同，则新创建的任务排前（沿用原行为，最小化变化）
         return (b.createdAt || '').localeCompare(a.createdAt || '');
       });
-
+      
     const completedTasks = dayTasks
       .filter((t) => t.isCompleted)
       .sort((a, b) => ((b.completedAt || '') + '').localeCompare((a.completedAt || '') + ''));
