@@ -43,7 +43,9 @@ Page({
       theme,
       themeStyle: colors.getThemeStyle(theme),
       statusBarHeight: app.globalData.statusBarHeight || 20,
-      targetDate: todayStr(),
+      // 原：targetDate: todayStr(),
+      // 改为：优先用来源页面传来的日期，没传（如直接 deep link）才默认今天
+      targetDate: options.date ? options.date : todayStr(),
       categories: storage.getCategories()
     });
 

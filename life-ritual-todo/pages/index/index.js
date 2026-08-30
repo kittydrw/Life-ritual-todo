@@ -291,8 +291,9 @@ Page({
 
   // ---- 导航 ----
   goAdd() {
-    // 恢复原行为：新任务默认归属今天（可在表单中自行修改日期）
-    wx.navigateTo({ url: '/pages/add/add' });
+    // 把当前所在日期页面的 selectedDate 作为新任务默认日期传过去
+    // selectedDate 在 8/31 页面就是 '2026-08-31'，在"今天"页面就是今天
+    wx.navigateTo({ url: '/pages/add/add?date=' + this.data.selectedDate });
   },
 
   goReview() {
