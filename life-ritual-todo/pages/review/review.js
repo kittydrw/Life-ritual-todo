@@ -246,6 +246,7 @@ Page({
     // 任务列表
     const rows = this.collectRows();
     let y = 254;
+    ctx.textAlign = 'left';   
     if (!rows.length) {
       ctx.fillStyle = '#A8B0AE';
       ctx.font = '28px sans-serif';

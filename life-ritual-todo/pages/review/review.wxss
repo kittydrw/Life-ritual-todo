@@ -278,10 +278,10 @@
 
 /* 底部分享 */
 .footer {
-  position: fixed;
+  /*position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 0;*/
   padding: 24rpx 40rpx 28rpx;
   background: var(--bg);
   box-shadow: 0 -4rpx 20rpx var(--shadow);
